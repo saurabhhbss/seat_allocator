@@ -1,0 +1,19 @@
+[project]
+name = "seat"
+version = "0.1.0"
+description = "REAP-2026 Seat Allocation Simulator"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pandas>=2.2.0",
+    "openpyxl>=3.1.0",
+    "pydantic>=2.0.0",
+    "streamlit>=1.30.0",
+    "click>=8.1.0",
+]
+
+[project.scripts]
+seat = "seat_alloc.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

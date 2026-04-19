@@ -1,0 +1,6 @@
+institute_code,program_code,name,programme,approved_intake,gas_seats,sfs_seats,last_year_fill_pct,management_quota_seats
+GOVT01,CSE,Computer Science & Engineering,BE_BTECH_BPLAN,60,60,0,100,0
+GOVT01,ECE,Electronics & Communication,BE_BTECH_BPLAN,40,40,0,100,0
+PVT01,CSE,Computer Science & Engineering,BE_BTECH_BPLAN,60,0,60,80,9
+PVT01,ME,Mechanical Engineering,BE_BTECH_BPLAN,40,0,40,75,6
+TSP01,CE,Civil Engineering,BE_BTECH_BPLAN,30,30,0,100,0

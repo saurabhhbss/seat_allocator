@@ -1,0 +1,4 @@
+code,name,type,is_tsp_area
+GOVT01,Government Engineering College Jaipur,GOVT,no
+PVT01,ABC Private Institute,PRIVATE,no
+TSP01,Government Engineering College Banswara,GOVT,yes

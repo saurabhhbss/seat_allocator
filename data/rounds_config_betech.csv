@@ -1,0 +1,12 @@
+round_no,name,mode,eligible_filter,requires_reported,requires_paid,rank_list,merge_after,notes
+0,Mock Round,mock,all,no,no,main,,Non-binding trial
+1,TFWS Counseling,fresh,is_tfws_eligible,no,no,tfws,,TFWS only; separate rank list; FINAL allotment
+2,TFWS Upward I,upward,all,yes,yes,tfws,,Upward within TFWS
+3,TFWS Upward II,upward,all,yes,yes,tfws,,Second upward within TFWS
+4,Special Categories,fresh,is_km OR is_pwd OR exs_code IS NOT NULL OR is_ors,no,no,main,WOMEN,KM + PwD + Ex-S + ORS; merge WOMEN after
+5,Special Upward,upward,all,yes,yes,main,"PWD,EXS",Upward for R4; merge PWD/EXS after
+6,Rajasthan Main,fresh,is_rajasthan_domicile,no,no,main,,Main counseling for Rajasthan
+7,RS Upward I,upward,all,yes,yes,main,,Upward I for Rajasthan
+8,RS Upward II,upward,all,yes,yes,main,,Upward II for Rajasthan
+9,Internal Sliding,sliding,all,yes,yes,main,,Institute-level branch change
+10,Direct + Management,spot,all,no,no,main,,Direct admission + 15% mgmt quota
