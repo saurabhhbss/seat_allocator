@@ -17,3 +17,11 @@ seat = "seat_alloc.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "seat"
+packages = [{include = "seat_alloc", from = "src"}]
