@@ -367,6 +367,10 @@ def run_simulation(
         priority=priority,
     )
 
+    from .sports_quota import run_sports_quota_round
+    if any(s.is_sports_category_a for s in state.students):
+        run_sports_quota_round(state)
+
     for rc in sorted(round_configs, key=lambda r: r.round_no):
         run_round(state, rc)
 

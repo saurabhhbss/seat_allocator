@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Real data — contains personal student info and large binaries
+data_real/
+resources/
+results_real/
+archive.zip

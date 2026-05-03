@@ -257,3 +257,9 @@ For issues or questions, check:
 - Validation errors show row/column hints
 
 The UI displays plain-English error messages if data is malformed.
+
+# For conversion run
+```sh
+uv run python scripts/convert_reap.py --sm resources/SM_download1.xlsx --merit resources/data1.xlsx --opts
+resources/option.DBF --out data_real/
+```

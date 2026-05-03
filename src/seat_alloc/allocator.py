@@ -59,6 +59,8 @@ class BucketState:
         if not self.is_full:
             heapq.heappush(self.occupants, (-rank, app_no))  # max-heap via negation
             return True, None
+        if not self.occupants:  # capacity=0, nothing to displace
+            return False, None
         worst_neg_rank, worst_app = self.occupants[0]
         worst_rank = -worst_neg_rank
         if rank < worst_rank:

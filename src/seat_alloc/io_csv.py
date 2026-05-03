@@ -59,7 +59,7 @@ def _read_df(path: str | Path) -> pd.DataFrame:
     if p.suffix in (".xlsx", ".xls"):
         df = pd.read_excel(p, engine="openpyxl")
     else:
-        df = pd.read_csv(p)
+        df = pd.read_csv(p, dtype=str)
     df.columns = [c.strip() for c in df.columns]
     return df
 
