@@ -84,7 +84,7 @@ with st.sidebar:
     st.divider()
     for i, name in enumerate(STEPS):
         icon = "●" if i == st.session_state.step else "○"
-        if st.button(f"{icon} {i + 1}. {name}", key=f"nav_{i}", use_container_width=True):
+        if st.button(f"{icon} {i + 1}. {name}", key=f"nav_{i}", width="stretch"):
             st.session_state.step = i
             st.rerun()
     st.divider()
@@ -113,7 +113,7 @@ def _step_load():
             loaded["seat_matrix"] = pd.read_csv(DATA_DIR / "seat_matrix.csv")
             st.success("Loaded sample seat_matrix.csv")
         if "seat_matrix" in loaded:
-            st.dataframe(loaded["seat_matrix"], use_container_width=True, height=200)
+            st.dataframe(loaded["seat_matrix"], width="stretch", height=200)
 
     with tabs[1]:
         f = st.file_uploader("students.csv", type=["csv", "xlsx"], key="ul_st")
@@ -123,7 +123,7 @@ def _step_load():
             loaded["students"] = pd.read_csv(DATA_DIR / "students.csv")
             st.success("Loaded sample students.csv")
         if "students" in loaded:
-            st.dataframe(loaded["students"], use_container_width=True, height=200)
+            st.dataframe(loaded["students"], width="stretch", height=200)
 
     with tabs[2]:
         f = st.file_uploader("ranks.csv", type=["csv", "xlsx"], key="ul_rk")
@@ -133,7 +133,7 @@ def _step_load():
             loaded["ranks"] = pd.read_csv(DATA_DIR / "ranks.csv")
             st.success("Loaded sample ranks.csv")
         if "ranks" in loaded:
-            st.dataframe(loaded["ranks"], use_container_width=True, height=200)
+            st.dataframe(loaded["ranks"], width="stretch", height=200)
 
     with tabs[3]:
         f = st.file_uploader("choices.csv", type=["csv", "xlsx"], key="ul_ch")
@@ -143,7 +143,7 @@ def _step_load():
             loaded["choices"] = pd.read_csv(DATA_DIR / "choices.csv")
             st.success("Loaded sample choices.csv")
         if "choices" in loaded:
-            st.dataframe(loaded["choices"], use_container_width=True, height=200)
+            st.dataframe(loaded["choices"], width="stretch", height=200)
 
     if loaded:
         st.session_state["loaded_data"] = loaded
@@ -178,7 +178,7 @@ def _step_edit():
         with tab:
             df = loaded[name]
             edited = st.data_editor(
-                df, num_rows="dynamic", use_container_width=True, key=f"edit_{name}",
+                df, num_rows="dynamic", width="stretch", key=f"edit_{name}",
             )
             loaded[name] = edited
             col1, col2 = st.columns(2)
@@ -228,7 +228,7 @@ def _step_policy():
 
         cp_df = st.data_editor(
             st.session_state["category_priority"],
-            use_container_width=True,
+            width="stretch",
             key="edit_cp",
         )
         st.session_state["category_priority"] = cp_df
@@ -255,7 +255,7 @@ def _step_policy():
         ])
         if "vert_res" not in st.session_state:
             st.session_state["vert_res"] = vert_df
-        edited_vr = st.data_editor(st.session_state["vert_res"], key="edit_vr", use_container_width=True)
+        edited_vr = st.data_editor(st.session_state["vert_res"], key="edit_vr", width="stretch")
         st.session_state["vert_res"] = edited_vr
         total = edited_vr["percent"].sum()
         if abs(total - 100) > 0.01:
@@ -271,7 +271,7 @@ def _step_policy():
         ])
         if "hor_res" not in st.session_state:
             st.session_state["hor_res"] = hor_df
-        edited_hr = st.data_editor(st.session_state["hor_res"], key="edit_hr", use_container_width=True)
+        edited_hr = st.data_editor(st.session_state["hor_res"], key="edit_hr", width="stretch")
         st.session_state["hor_res"] = edited_hr
 
     if st.button("Next: Run Allocation →", type="primary"):
@@ -305,7 +305,7 @@ def _step_run():
     st.write(f"**{len(round_configs)} rounds** configured for {programme}")
     st.dataframe(
         pd.DataFrame([rc.model_dump() for rc in round_configs]),
-        use_container_width=True,
+        width="stretch",
         height=200,
     )
 
@@ -410,7 +410,7 @@ def _step_results():
     with tab_summary:
         st.subheader("Round Summary")
         df_summary = mods["round_summary"](state)
-        st.dataframe(df_summary, use_container_width=True)
+        st.dataframe(df_summary, width="stretch")
         st.download_button(
             "Download summary.xlsx",
             _to_excel_bytes(df_summary),
@@ -424,7 +424,7 @@ def _step_results():
             all_allocs.extend(rr.allocations)
         df_alloc = mods["alloc_tbl"](all_allocs)
         if not df_alloc.empty:
-            st.dataframe(df_alloc, use_container_width=True, height=400)
+            st.dataframe(df_alloc, width="stretch", height=400)
             st.download_button(
                 "Download allocations.xlsx",
                 _to_excel_bytes(df_alloc),
@@ -434,7 +434,7 @@ def _step_results():
             st.subheader("Final Allocations")
             final_allocs = list(state.current_allocations.values())
             df_final = mods["alloc_tbl"](final_allocs)
-            st.dataframe(df_final, use_container_width=True, height=400)
+            st.dataframe(df_final, width="stretch", height=400)
             st.download_button(
                 "Download final_allocations.xlsx",
                 _to_excel_bytes(df_final),
@@ -447,7 +447,7 @@ def _step_results():
         st.subheader("Opening & Closing Ranks")
         df_cut = mods["cutoff_tbl"](state)
         if not df_cut.empty:
-            st.dataframe(df_cut, use_container_width=True, height=400)
+            st.dataframe(df_cut, width="stretch", height=400)
             st.download_button("Download cutoffs.xlsx", _to_excel_bytes(df_cut), "cutoffs.xlsx")
         else:
             st.info("No cutoff data.")
@@ -456,7 +456,7 @@ def _step_results():
         st.subheader("Vacancy Report")
         df_vac = mods["vacancy_tbl"](state.seat_slots, state.current_allocations)
         if not df_vac.empty:
-            st.dataframe(df_vac, use_container_width=True, height=400)
+            st.dataframe(df_vac, width="stretch", height=400)
             total_cap = df_vac["capacity"].sum()
             total_filled = df_vac["filled"].sum()
             st.metric("Fill Rate", f"{total_filled}/{total_cap} ({100 * total_filled / max(total_cap, 1):.1f}%)")
@@ -470,7 +470,7 @@ def _step_results():
             if df_trace.empty:
                 st.info(f"No records found for '{app_no}'.")
             else:
-                st.dataframe(df_trace, use_container_width=True)
+                st.dataframe(df_trace, width="stretch")
 
 
 # ---------------------------------------------------------------------------
